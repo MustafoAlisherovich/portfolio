@@ -28,7 +28,7 @@ function Navbar() {
 				{/* Desktop menu */}
 				<div className='flex items-center justify-between h-16'>
 					<Link href='/' className='text-xl font-bold text-primary'>
-						Portfolio&trade;
+						Alisherovich&trade;
 					</Link>
 
 					<div className='hidden md:flex items-center space-x-8'>

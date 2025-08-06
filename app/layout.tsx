@@ -2,8 +2,8 @@ import { ThemeProvider } from '@/components/shared/theme-context'
 import { ChildProps } from '@/types'
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
+import NextTopLoader from 'nextjs-toploader'
 import './globals.css'
-
 const geistSans = Geist({
 	variable: '--font-geist-sans',
 	subsets: ['latin'],
@@ -23,9 +23,22 @@ export default function RootLayout({ children }: ChildProps) {
 	return (
 		<html lang='en'>
 			<body
-				className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white transition-colors dark:bg-gray-900 dark:text-white`}
+				className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white transition-colors dark:bg-gray-900 dark:text-white custom-scrollbar`}
 			>
-				<ThemeProvider>{children}</ThemeProvider>
+				<ThemeProvider>
+					<NextTopLoader
+						color='#007aff'
+						initialPosition={0.5}
+						crawlSpeed={200}
+						height={2}
+						crawl={true}
+						showSpinner={false}
+						easing='ease'
+						speed={200}
+						shadow='0 0 10px #007aff,0 0 5px #007aff'
+					/>
+					{children}
+				</ThemeProvider>
 			</body>
 		</html>
 	)

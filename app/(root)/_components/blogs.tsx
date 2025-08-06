@@ -1,50 +1,88 @@
+'use client'
+
 import { blogs } from '@/constants/blogs'
+import { cardHoverSmall, fadeInUp, staggerContainer } from '@/utils/animations'
+import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { FaCalendar, FaClock } from 'react-icons/fa'
+import { FaCalendarAlt, FaClock } from 'react-icons/fa'
 
 function Blogs() {
 	return (
 		<section className='py-30 container max-w-7xl mx-auto px-4'>
-			<h2 className='text-3xl font-bold mb-12 text-center'>
+			<motion.h2 {...fadeInUp} className='text-3xl font-bold mb-12 text-center'>
 				Latest Blog Posts
-			</h2>
+			</motion.h2>
 
-			<div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
+			<motion.div
+				className='grid grid-cols-1 md:grid-cols-3 gap-8'
+				variants={staggerContainer}
+				initial='initial'
+				animate='animate'
+			>
 				{blogs.map(blog => (
-					<article
+					<motion.article
 						key={blog.slug}
 						className='bg-white dark:bg-dark/50 rounded-lg shadow-md p-6'
+						variants={fadeInUp}
+						{...cardHoverSmall}
 					>
 						<Link href={`/blogs/${blog.slug}`}>
-							<h3 className='text-xl font-semibold mb-2 hover:text-primary transition-colors'>
+							<motion.h3
+								className='text-xl font-semibold mb-2 hover:text-primary transition-colors'
+								whileHover={{ x: 5 }}
+								transition={{ type: 'spring', stiffness: 300 }}
+							>
 								{blog.title}
-							</h3>
+							</motion.h3>
 						</Link>
-						<p className='text-gray-600 dark:text-gray-300 mb-4'>
+						<motion.p
+							className='text-gray-600 dark:text-gray-300 mb-4'
+							initial={{ opacity: 0 }}
+							animate={{ opacity: 1 }}
+							transition={{ delay: 0.2 }}
+						>
 							{blog.excerpt}
-						</p>
-						<div className='flex items-center text-sm text-gray-500 dark:text-gray-400 space-x-4'>
-							<span className='flex items-center'>
-								<FaCalendar className='mr-2' />
+						</motion.p>
+						<motion.div
+							className='flex items-center text-sm text-gray-500 dark:text-gray-400 space-x-4'
+							initial={{ opacity: 0 }}
+							animate={{ opacity: 1 }}
+							transition={{ delay: 0.3 }}
+						>
+							<motion.span
+								className='flex items-center'
+								whileHover={{ scale: 1.05 }}
+							>
+								<FaCalendarAlt className='mr-2' />
 								{new Date(blog.date).toLocaleDateString()}
-							</span>
-							<span className='flex items-center'>
+							</motion.span>
+							<motion.span
+								className='flex items-center'
+								whileHover={{ scale: 1.05 }}
+							>
 								<FaClock className='mr-2' />
 								{blog.readTime}
-							</span>
-						</div>
-					</article>
+							</motion.span>
+						</motion.div>
+					</motion.article>
 				))}
-			</div>
+			</motion.div>
 
-			<div className='text-center mt-12'>
-				<Link
-					href={'/blogs'}
-					className='inline-block bg-primary text-white px-8 py-3 rounded-lg hover:bg-primary/90 transition-colors'
-				>
-					View All Posts
-				</Link>
-			</div>
+			<motion.div
+				className='text-center mt-12'
+				initial={{ opacity: 0, y: 20 }}
+				animate={{ opacity: 1, y: 0 }}
+				transition={{ delay: 0.4 }}
+			>
+				<motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+					<Link
+						href='/blogs'
+						className='inline-block bg-primary text-white px-8 py-3 rounded-lg hover:bg-primary/90 transition-colors'
+					>
+						View All Posts
+					</Link>
+				</motion.div>
+			</motion.div>
 		</section>
 	)
 }
