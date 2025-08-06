@@ -1,9 +1,9 @@
 'use client'
 
+import CustomImage from '@/components/shared/custom-image'
 import { projects } from '@/constants/projects'
 import { cardHoverSmall, fadeInUp, staggerContainer } from '@/utils/animations'
 import { motion } from 'framer-motion'
-import Image from 'next/image'
 import { FaExternalLinkAlt, FaGithub } from 'react-icons/fa'
 
 export default function Projects() {
@@ -35,13 +35,7 @@ export default function Projects() {
 								transition={{ type: 'spring', stiffness: 300 }}
 								className='relative aspect-video mb-4 rounded-lg overflow-hidden'
 							>
-								<Image
-									src={project.image}
-									alt={project.title}
-									fill
-									className='object-cover'
-									sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
-								/>
+								<CustomImage src={project.image} alt={project.title} />
 							</motion.div>
 							<motion.h3
 								className='text-xl font-semibold mb-2'
