@@ -1,6 +1,6 @@
 'use client'
 
-import { fadeIn, fadeInUp, slideInRight } from '@/utils/animations'
+import { fadeIn, fadeInUp, slideInRight } from '@/lib/utils'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 

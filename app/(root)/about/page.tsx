@@ -7,7 +7,7 @@ import {
 	fadeInDown,
 	fadeInUp,
 	staggerContainer,
-} from '@/utils/animations'
+} from '@/lib/utils'
 import { motion } from 'framer-motion'
 import { FaCode, FaLaptopCode } from 'react-icons/fa'
 

@@ -1,10 +1,10 @@
 'use client'
 
-import CustomImage from '@/components/shared/custom-image'
+import ProjectCard from '@/components/cards/project.card'
 import { projects } from '@/constants/projects'
-import { cardHoverSmall, fadeInUp, staggerContainer } from '@/utils/animations'
+import { fadeInUp, staggerContainer } from '@/lib/utils'
 import { motion } from 'framer-motion'
-import { FaExternalLinkAlt, FaGithub } from 'react-icons/fa'
+import Link from 'next/link'
 
 export default function Projects() {
 	return (
@@ -23,85 +23,25 @@ export default function Projects() {
 					initial='initial'
 					animate='animate'
 				>
-					{projects.map(project => (
-						<motion.article
-							key={project.title}
-							className='bg-white dark:bg-dark/50 rounded-lg shadow-md p-6'
-							variants={fadeInUp}
-							{...cardHoverSmall}
-						>
-							<motion.div
-								whileHover={{ scale: 1.05 }}
-								transition={{ type: 'spring', stiffness: 300 }}
-								className='relative aspect-video mb-4 rounded-lg overflow-hidden'
-							>
-								<CustomImage src={project.image} alt={project.title} />
-							</motion.div>
-							<motion.h3
-								className='text-xl font-semibold mb-2'
-								whileHover={{ x: 5 }}
-								transition={{ type: 'spring', stiffness: 300 }}
-							>
-								{project.title}
-							</motion.h3>
-							<motion.p
-								className='text-gray-600 dark:text-gray-300 mb-4'
-								initial={{ opacity: 0 }}
-								animate={{ opacity: 1 }}
-								transition={{ delay: 0.2 }}
-							>
-								{project.description}
-							</motion.p>
-							<motion.div
-								className='flex flex-wrap gap-2 mb-4'
-								initial={{ opacity: 0 }}
-								animate={{ opacity: 1 }}
-								transition={{ delay: 0.3 }}
-							>
-								{project.technologies.map(tech => (
-									<motion.span
-										key={tech}
-										className='px-3 py-1 bg-primary/10 text-primary rounded-full text-sm'
-										whileHover={{ scale: 1.1 }}
-										whileTap={{ scale: 0.95 }}
-									>
-										{tech}
-									</motion.span>
-								))}
-							</motion.div>
-							<motion.div
-								className='flex gap-4'
-								initial={{ opacity: 0 }}
-								animate={{ opacity: 1 }}
-								transition={{ delay: 0.4 }}
-							>
-								<motion.a
-									href={project.githubLink}
-									target='_blank'
-									rel='noopener noreferrer'
-									className='flex items-center gap-2 text-secondary hover:text-primary transition-colors'
-									whileHover={{ x: 5 }}
-									whileTap={{ scale: 0.95 }}
-								>
-									<FaGithub className='h-5 w-5' />
-									<span>Code</span>
-								</motion.a>
-								<motion.a
-									href={project.demoLink}
-									target='_blank'
-									rel='noopener noreferrer'
-									className='flex items-center gap-2 text-secondary hover:text-primary transition-colors'
-									whileHover={{ x: 5 }}
-									whileTap={{ scale: 0.95 }}
-								>
-									<FaExternalLinkAlt className='h-5 w-5' />
-									<span>Live Demo</span>
-								</motion.a>
-							</motion.div>
-						</motion.article>
-					))}
+					{projects
+						.map(project => <ProjectCard key={project.title} {...project} />)
+						.splice(0, 6)}
 				</motion.div>
 			</div>
+
+			<motion.div
+				className='text-center mt-12'
+				initial={{ opacity: 0, y: 20 }}
+				animate={{ opacity: 1, y: 0 }}
+				transition={{ delay: 0.4 }}
+			>
+				<Link
+					href='/projects'
+					className='inline-block bg-primary text-white px-8 py-3 rounded-lg hover:bg-primary/90 transition-colors'
+				>
+					View All Projects
+				</Link>
+			</motion.div>
 		</section>
 	)
 }

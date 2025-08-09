@@ -1,6 +1,6 @@
 'use client'
 
-import { fadeIn, fadeInUp, slideInLeft } from '@/utils/animations'
+import { fadeIn, fadeInUp, slideInLeft } from '@/lib/utils'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { FaEnvelope, FaMapMarkerAlt, FaPhone } from 'react-icons/fa'

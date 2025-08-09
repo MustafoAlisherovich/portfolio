@@ -1,6 +1,6 @@
 'use client'
 
-import { fadeInUp, scaleIn, slideInRight } from '@/utils/animations'
+import { fadeInUp, scaleIn, slideInRight } from '@/lib/utils'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -27,7 +27,7 @@ function Hero() {
 				<motion.h1
 					{...fadeInUp}
 					transition={{ delay: 0.3 }}
-					className='text-4xl md:text-6xl font-bold mb-7'
+					className='text-4xl md:text-6xl font-bold mb-7 '
 				>
 					Hi, I'm{' '}
 					<motion.span
