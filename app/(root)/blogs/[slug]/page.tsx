@@ -5,8 +5,8 @@ interface Props {
 	params: { slug: string }
 }
 
-async function Page({ params: { slug } }: Props) {
-	const blogJSON = await getDetailedBlog(slug)
+async function Page({ params }: Props) {
+	const blogJSON = await getDetailedBlog(params.slug)
 
 	if (!blogJSON) {
 		return <p>Blog not found</p>
