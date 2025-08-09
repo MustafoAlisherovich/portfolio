@@ -1,7 +1,9 @@
+import AddBlogForm from '../_components/add-blog.form'
+
 function Page() {
 	return (
 		<>
-			<h2 className='text-center text-3xl'>Add Blog</h2>
+			<AddBlogForm />
 		</>
 	)
 }

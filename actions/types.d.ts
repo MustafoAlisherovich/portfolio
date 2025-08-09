@@ -6,3 +6,9 @@ export interface ICreateProject {
 	github: string
 	liveDemo: string
 }
+
+export interface ICreateBlog {
+	title: string
+	description: string
+	content: string
+}

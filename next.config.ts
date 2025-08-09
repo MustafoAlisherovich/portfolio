@@ -1,7 +1,23 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
-  /* config options here */
-};
+	images: {
+		remotePatterns: [
+			new URL(
+				'https://upvog01q05.ufs.sh/f/046mW6K0rnOIKj4gqzuWy7oVraYFh1HSdMtf0CTRnNbPqBku'
+			),
+			{
+				protocol: 'https',
+				hostname: 'res.cloudinary.com',
+				pathname: '/**',
+			},
+			{
+				protocol: 'https',
+				hostname: 'example.com',
+				pathname: '/images/**',
+			},
+		],
+	},
+}
 
-export default nextConfig;
+export default nextConfig

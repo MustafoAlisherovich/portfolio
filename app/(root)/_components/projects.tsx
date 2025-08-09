@@ -1,12 +1,16 @@
 'use client'
 
+import { IProject } from '@/app,types'
 import ProjectCard from '@/components/cards/project.card'
-import { projects } from '@/constants/projects'
 import { fadeInUp, staggerContainer } from '@/lib/utils'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 
-export default function Projects() {
+interface Props {
+	projects: IProject[]
+}
+
+export default function Projects({ projects }: Props) {
 	return (
 		<section className='py-20'>
 			<div className='container max-w-7xl mx-auto px-4'>
@@ -24,7 +28,12 @@ export default function Projects() {
 					animate='animate'
 				>
 					{projects
-						.map(project => <ProjectCard key={project.title} {...project} />)
+						.map(project => (
+							<ProjectCard
+								key={project.title}
+								project={JSON.parse(JSON.stringify(project))}
+							/>
+						))
 						.splice(0, 6)}
 				</motion.div>
 			</div>
@@ -35,12 +44,14 @@ export default function Projects() {
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ delay: 0.4 }}
 			>
-				<Link
-					href='/projects'
-					className='inline-block bg-primary text-white px-8 py-3 rounded-lg hover:bg-primary/90 transition-colors'
-				>
-					View All Projects
-				</Link>
+				{projects.length > 6 && (
+					<Link
+						href='/projects'
+						className='inline-block bg-primary text-white px-8 py-3 rounded-lg hover:bg-primary/90 transition-colors'
+					>
+						View All Projects
+					</Link>
+				)}
 			</motion.div>
 		</section>
 	)

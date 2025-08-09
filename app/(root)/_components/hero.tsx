@@ -29,7 +29,7 @@ function Hero() {
 					transition={{ delay: 0.3 }}
 					className='text-4xl md:text-6xl font-bold mb-7 '
 				>
-					Hi, I'm{' '}
+					Hi, I&apos;m{' '}
 					<motion.span
 						{...slideInRight}
 						transition={{ delay: 0.7 }}

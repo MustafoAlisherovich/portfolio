@@ -23,13 +23,13 @@ function Page() {
 
 			<motion.section className='mb-16' {...fadeInUp}>
 				<p className='text-lg text-secondary max-w-3xl mx-auto text-center'>
-					I'm a Fullstack Web Developer with experience in building modern and
-					scalable web applications from front to back. My main stack includes
-					React.js, Next.js, TypeScript, Node.js, and Firebase. I enjoy creating
-					fast, secure, and user-focused solutions. Whether it’s a dynamic
-					frontend interface or a robust backend API, I always aim to write
-					clean, efficient, and maintainable code. I take pride in turning ideas
-					into fully functional digital products that users enjoy.
+					I&apos;m a Fullstack Web Developer with experience in building modern
+					and scalable web applications from front to back. My main stack
+					includes React.js, Next.js, TypeScript, Node.js, and Firebase. I enjoy
+					creating fast, secure, and user-focused solutions. Whether it&apos;s a
+					dynamic frontend interface or a robust backend API, I always aim to
+					write clean, efficient, and maintainable code. I take pride in turning
+					ideas into fully functional digital products that users enjoy.
 				</p>
 			</motion.section>
 

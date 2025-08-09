@@ -9,7 +9,7 @@ interface Props {
 	className?: string
 }
 
-function CustomImage({ src, alt, className }: Props) {
+function CustomImage({ src, alt }: Props) {
 	const [loading, setLoading] = useState(true)
 
 	return (

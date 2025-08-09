@@ -1,12 +1,16 @@
 'use client'
 
+import { IProject } from '@/app,types'
 import { cardHoverSmall, fadeInUp } from '@/lib/utils'
-import { Project } from '@/types'
 import { motion } from 'framer-motion'
 import { FaExternalLinkAlt, FaGithub } from 'react-icons/fa'
 import CustomImage from '../shared/custom-image'
 
-function ProjectCard(project: Project) {
+interface Props {
+	project: IProject
+}
+
+function ProjectCard({ project }: Props) {
 	return (
 		<motion.article
 			className='bg-white dark:bg-dark/50 rounded-lg shadow-md p-6'
@@ -18,7 +22,7 @@ function ProjectCard(project: Project) {
 				transition={{ type: 'spring', stiffness: 300 }}
 				className='relative aspect-video mb-4 rounded-lg overflow-hidden'
 			>
-				<CustomImage src={project.image} alt={project.title} />
+				<CustomImage src={project.previewImage} alt={project.title} />
 			</motion.div>
 
 			<motion.h3
@@ -63,7 +67,7 @@ function ProjectCard(project: Project) {
 				<motion.a
 					whileHover={{ x: 5 }}
 					whileTap={{ scale: 0.95 }}
-					href={project.githubLink}
+					href={project.github}
 					target='_blank'
 					className='flex items-center gap-2 text-secondary hover:text-primary transition-colors '
 				>
@@ -73,7 +77,7 @@ function ProjectCard(project: Project) {
 				<motion.a
 					whileHover={{ x: 5 }}
 					whileTap={{ scale: 0.95 }}
-					href={project.githubLink}
+					href={project.liveDemo}
 					target='_blank'
 					className='flex items-center gap-2 text-secondary hover:text-primary transition-colors '
 				>

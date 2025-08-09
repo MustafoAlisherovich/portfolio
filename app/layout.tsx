@@ -3,6 +3,7 @@ import { ChildProps } from '@/types'
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import NextTopLoader from 'nextjs-toploader'
+import { Toaster } from 'react-hot-toast'
 import './globals.css'
 const geistSans = Geist({
 	variable: '--font-geist-sans',
@@ -36,6 +37,30 @@ export default function RootLayout({ children }: ChildProps) {
 						easing='ease'
 						speed={200}
 						shadow='0 0 10px #007aff,0 0 5px #007aff'
+					/>
+					<Toaster
+						position='top-center'
+						toastOptions={{
+							duration: 4000,
+							style: {
+								background: '#1f2937',
+								color: '#fff',
+								borderRadius: '8px',
+								padding: '12px 16px',
+							},
+							success: {
+								iconTheme: {
+									primary: '#4ade80',
+									secondary: '#fff',
+								},
+							},
+							error: {
+								iconTheme: {
+									primary: '#ef4444',
+									secondary: '#fff',
+								},
+							},
+						}}
 					/>
 					{children}
 				</ThemeProvider>

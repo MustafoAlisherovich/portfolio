@@ -8,6 +8,7 @@ const ProjectSchema = new Schema(
 		previewImage: String,
 		github: String,
 		liveDemo: String,
+		slug: String,
 	},
 	{ timestamps: true }
 )

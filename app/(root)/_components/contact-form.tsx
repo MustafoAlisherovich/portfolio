@@ -1,60 +1,56 @@
 'use client'
 
 import { fadeIn, fadeInUp, slideInRight } from '@/lib/utils'
+import { contactSchema } from '@/lib/validation'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
-
-interface FormData {
-	name: string
-	email: string
-	message: string
-}
-
-type FormStatus = 'idle' | 'loading' | 'sending' | 'success' | 'error'
+import { useForm } from 'react-hook-form'
+import toast from 'react-hot-toast'
+import z from 'zod'
 
 function ContactForm() {
-	const [formData, setFormData] = useState<FormData>({
-		name: '',
-		email: '',
-		message: '',
+	const [loading, setLoading] = useState(false)
+
+	const form = useForm<z.infer<typeof contactSchema>>({
+		resolver: zodResolver(contactSchema),
+		defaultValues: {
+			name: '',
+			email: '',
+			message: '',
+		},
 	})
 
-	const [status, setStatus] = useState<FormStatus>('idle')
+	const onSubmit = (values: z.infer<typeof contactSchema>) => {
+		setLoading(true)
 
-	const handleSubmit = async (e: React.FormEvent) => {
-		e.preventDefault()
-		setStatus('loading')
-		try {
-			const res = await fetch('/api/contact', {
+		const telegramBotId = process.env.NEXT_PUBLIC_TELEGRAM_BOT_API!
+		const telegramChatId = process.env.NEXT_PUBLIC_TELEGRAM_CHAT_ID!
+
+		const promise = fetch(
+			`https://api.telegram.org/bot${telegramBotId}/sendMessage`,
+			{
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
+					'cache-control': 'no-cache',
 				},
-				body: JSON.stringify(formData),
-			})
-
-			if (!res.ok) {
-				throw new Error('Failed to send message')
+				body: JSON.stringify({
+					chat_id: telegramChatId,
+					text: `Name: ${values.name}
+				Email: ${values.email}
+				Message: ${values.message}`,
+				}),
 			}
+		)
+			.then(() => form.reset())
+			.finally(() => setLoading(false))
 
-			setStatus('success')
-			setFormData({
-				name: '',
-				email: '',
-				message: '',
-			})
-		} catch (error) {
-			setStatus('error')
-		}
-	}
-
-	const handleChange = (
-		e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-	) => {
-		setFormData(prev => ({
-			...prev,
-			[e.target.name]: e.target.value,
-		}))
+		toast.promise(promise, {
+			loading: 'Loading...',
+			success: 'Successfully!',
+			error: 'Something went wrong!',
+		})
 	}
 
 	return (
@@ -66,39 +62,36 @@ function ContactForm() {
 				variants={fadeIn}
 				initial='initial'
 				animate='animate'
-				onSubmit={handleSubmit}
+				onSubmit={form.handleSubmit(onSubmit)}
 				className='space-y-6'
 			>
 				<motion.div variants={fadeInUp}>
-					<label htmlFor='name' className='block text-sm font-medium mb-2'>
-						Name
-					</label>
+					<label className='block text-sm font-medium mb-2'>Name</label>
 					<input
+						disabled={loading}
 						type='text'
-						value={formData.name}
-						onChange={handleChange}
-						required
-						id='name'
-						name='name'
-						placeholder='Enter your name'
+						{...form.register('name')}
 						className='w-full px-4 py-2 placeholder:text-primary/40 rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-dark focus:ring-2 focus:ring-primary focus:border-transparent'
+						placeholder='Blog title'
 					/>
+
+					<p className='text-red-500 text-sm mt-1'>
+						{form.formState.errors.name?.message}
+					</p>
 				</motion.div>
 
 				<motion.div variants={fadeInUp}>
-					<label htmlFor='email' className='block text-sm font-medium mb-2'>
-						Email
-					</label>
+					<label className='block text-sm font-medium mb-2'>Email</label>
 					<input
+						disabled={loading}
 						type='email'
-						id='email'
-						name='email'
-						placeholder='Enter your email'
-						value={formData.email}
-						onChange={handleChange}
-						required
-						className='w-full px-4 py-2 rounded-md border placeholder:text-primary/40 border-gray-300 dark:border-gray-700 bg-white dark:bg-dark focus:ring-2 focus:ring-primary focus:border-transparent'
-					/>
+						{...form.register('email')}
+						className='w-full px-4 py-2 placeholder:text-primary/40 rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-dark focus:ring-2 focus:ring-primary focus:border-transparent'
+						placeholder='Blog title'
+					/>{' '}
+					<p className='text-red-500 text-sm mt-1'>
+						{form.formState.errors.email?.message}
+					</p>
 				</motion.div>
 
 				<motion.div variants={fadeInUp}>
@@ -106,46 +99,26 @@ function ContactForm() {
 						Message
 					</label>
 					<textarea
-						rows={4}
-						required
-						value={formData.message}
-						onChange={handleChange}
-						id='message'
-						name='message'
-						placeholder='Enter your message'
+						disabled={loading}
+						{...form.register('message')}
 						className='w-full px-4 py-2 rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-dark focus:ring-2 placeholder:text-primary/40 focus:ring-primary focus:border-transparent'
+						placeholder='Blog description'
+						rows={3}
 					/>
+					<p className='text-red-500 text-sm mt-1'>
+						{form.formState.errors.message?.message}
+					</p>
 				</motion.div>
 
 				<motion.button
 					type='submit'
+					disabled={loading}
 					className='w-full btn btn-primary'
-					disabled={status === 'loading'}
 					whileHover={{ scale: 1.02 }}
 					whileTap={{ scale: 0.98 }}
 				>
-					{status === 'loading' ? 'Sending...' : 'Send Message'}
+					{loading ? 'Loading...' : 'Submit'}
 				</motion.button>
-
-				{status === 'success' && (
-					<motion.p
-						initial={{ opacity: 0, y: 10 }}
-						animate={{ opacity: 1, y: 0 }}
-						className='text-gray-500 text-center'
-					>
-						Message sent successfully!
-					</motion.p>
-				)}
-
-				{status === 'error' && (
-					<motion.p
-						initial={{ opacity: 0, y: 10 }}
-						animate={{ opacity: 1, y: 0 }}
-						className='text-red-500 text-center'
-					>
-						Failed to send message. Please try again.
-					</motion.p>
-				)}
 			</motion.form>
 		</motion.div>
 	)

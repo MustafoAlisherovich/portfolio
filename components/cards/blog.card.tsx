@@ -1,12 +1,17 @@
 'use client'
 
-import { cardHoverSmall, fadeInUp } from '@/lib/utils'
-import { Blog } from '@/types'
+import { IBlog } from '@/app,types'
+import { cardHoverSmall, fadeInUp, getReadingTime } from '@/lib/utils'
+import { format } from 'date-fns'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { FaCalendarAlt, FaClock } from 'react-icons/fa'
 
-function BlogCard(blog: Blog) {
+interface Props {
+	blog: IBlog
+}
+
+function BlogCard({ blog }: Props) {
 	return (
 		<motion.article
 			className='bg-white dark:bg-dark/50 rounded-lg shadow-md p-6'
@@ -28,7 +33,7 @@ function BlogCard(blog: Blog) {
 				animate={{ opacity: 1 }}
 				transition={{ delay: 0.2 }}
 			>
-				{blog.excerpt}
+				{blog.description}
 			</motion.p>
 			<motion.div
 				className='flex items-center text-sm text-gray-500 dark:text-gray-400 space-x-4'
@@ -38,11 +43,11 @@ function BlogCard(blog: Blog) {
 			>
 				<motion.span className='flex items-center' whileHover={{ scale: 1.05 }}>
 					<FaCalendarAlt className='mr-2' />
-					{new Date(blog.date).toLocaleDateString()}
+					{format(new Date(blog.createdAt), 'MMM dd, yyyy')}
 				</motion.span>
 				<motion.span className='flex items-center' whileHover={{ scale: 1.05 }}>
 					<FaClock className='mr-2' />
-					{blog.readTime}
+					{getReadingTime(blog.content)} min read time
 				</motion.span>
 			</motion.div>
 		</motion.article>
