@@ -1,12 +1,9 @@
 import { getDetailedBlog } from '@/actions/blog.action'
 import { format } from 'date-fns'
 
-interface Props {
-	params: { slug: string }
-}
-
-async function Page({ params }: Props) {
-	const blogJSON = await getDetailedBlog(params.slug)
+async function Page({ params }: { params: Promise<{ slug: string }> }) {
+	const { slug } = await params
+	const blogJSON = await getDetailedBlog(slug)
 
 	if (!blogJSON) {
 		return <p>Blog not found</p>
