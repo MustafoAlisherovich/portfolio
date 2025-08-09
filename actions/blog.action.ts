@@ -3,6 +3,7 @@
 import Blog from '@/database/blog.model'
 import { connectToDabase } from '@/lib/mongoose'
 import { revalidatePath } from 'next/cache'
+import { cache } from 'react'
 import { ICreateBlog } from './types'
 
 export const createBlog = async (data: ICreateBlog) => {
@@ -35,11 +36,11 @@ export const deleteBlog = async (id: string, path: string) => {
 	}
 }
 
-export const getDetailedBlog = async (slug: string) => {
+export const getDetailedBlog = cache(async (slug: string) => {
 	try {
 		await connectToDabase()
 		return await Blog.findOne({ slug }).select('title content createdAt slug')
 	} catch (error) {
 		throw new Error('Something went wrong while getting detailed blog')
 	}
-}
+})

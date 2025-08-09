@@ -5,8 +5,9 @@ let isConnected: boolean = false
 export const connectToDabase = async () => {
 	mongoose.set('strictQuery', true)
 
-	if (!process.env.MONGO_URL) {
-		return console.log('Missing MONGO_URL')
+	if (!process.env.MONGO_URI) {
+		console.warn('Missing MONGO_URI')
+		return
 	}
 
 	if (isConnected) return
@@ -17,7 +18,7 @@ export const connectToDabase = async () => {
 			autoCreate: true,
 		}
 
-		await mongoose.connect(process.env.MONGO_URL, options)
+		await mongoose.connect(process.env.MONGO_URI, options)
 		isConnected = true
 	} catch (error) {
 		console.log('MONGODB connection failed!', error)
