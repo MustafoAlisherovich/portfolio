@@ -10,10 +10,13 @@ import z from 'zod'
 import { createBlog } from '@/actions/blog.action'
 import '@uiw/react-markdown-preview/markdown.css'
 import '@uiw/react-md-editor/markdown-editor.css'
+import { useRouter } from 'next/navigation'
 import toast from 'react-hot-toast'
 
 function AddBlogForm() {
 	const [loading, setLoading] = useState(false)
+
+	const router = useRouter()
 
 	const form = useForm<z.infer<typeof addBlogSchema>>({
 		resolver: zodResolver(addBlogSchema),
@@ -28,7 +31,10 @@ function AddBlogForm() {
 		setLoading(true)
 
 		const promise = createBlog({ ...values })
-			.then(() => form.reset())
+			.then(() => {
+				form.reset()
+				router.push('/admin')
+			})
 			.finally(() => setLoading(false))
 
 		toast.promise(promise, {

@@ -4,6 +4,7 @@ import { createProject } from '@/actions/project.action'
 import { UploadButton } from '@/lib/uploadthing'
 import { addProjectSchema } from '@/lib/validation'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
@@ -13,7 +14,8 @@ export default function AddProjectForm() {
 	const [loading, setLoading] = useState(false)
 	const [badges, setBadges] = useState<string[]>([])
 	const [badgeInput, setBadgeInput] = useState('')
-	const [previewImage, setPreviewImage] = useState('')
+
+	const router = useRouter()
 
 	const handleBadgeKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
 		if (e.key === 'Enter' && badgeInput.trim()) {
@@ -44,25 +46,21 @@ export default function AddProjectForm() {
 	const onSubmit = (values: z.infer<typeof addProjectSchema>) => {
 		setLoading(true)
 
-		if (!previewImage) {
-			toast.error('Please upload image')
-		}
-
 		const promise = createProject({
 			...values,
 			technologies: badges,
-			previewImage,
 		})
 			.then(() => {
 				form.reset()
 				setBadges([])
+				router.push('/admin')
 			})
 			.finally(() => setLoading(false))
 
 		toast.promise(promise, {
 			loading: 'Creating project...',
-			success: 'Project created successfully 🎉',
-			error: 'Something went wrong ❌',
+			success: 'Project created successfully',
+			error: 'Something went wrong',
 		})
 	}
 
@@ -138,6 +136,7 @@ export default function AddProjectForm() {
 				</div>
 			</div>
 
+			{/* Github & Live Demo */}
 			<div className='grid grid-cols-2 gap-2'>
 				<div>
 					<label className='block text-sm font-medium mb-2'>Github Link</label>
@@ -148,11 +147,6 @@ export default function AddProjectForm() {
 						className='w-full px-4 py-2 placeholder:text-primary/40 rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-dark focus:ring-2 focus:ring-primary focus:border-transparent'
 						placeholder='https://github.com'
 					/>
-					{form.formState.errors.title && (
-						<p className='text-red-500 text-sm mt-1'>
-							{form.formState.errors.title.message}
-						</p>
-					)}
 				</div>
 				<div>
 					<label className='block text-sm font-medium mb-2'>Live Demo</label>
@@ -163,33 +157,36 @@ export default function AddProjectForm() {
 						className='w-full px-4 py-2 placeholder:text-primary/40 rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-dark focus:ring-2 focus:ring-primary focus:border-transparent'
 						placeholder='https://example.com'
 					/>
-					{form.formState.errors.title && (
-						<p className='text-red-500 text-sm mt-1'>
-							{form.formState.errors.title.message}
-						</p>
-					)}
 				</div>
 			</div>
 
-			{/* Submit */}
+			{/* Upload Button + Submit */}
 			<div className='flex gap-4'>
 				<UploadButton
 					disabled={loading}
 					appearance={{ allowedContent: 'hidden' }}
-					className='ut-button:bg-gray-800 ut-button:hover:bg-gray-700 ut-button:w-30 ut-button:transition-colors'
+					className='ut-button:bg-gray-800 ut-button:hover:bg-gray-700'
 					endpoint={'imageUploader'}
 					onClientUploadComplete={res => {
-						setPreviewImage(res[0].ufsUrl)
+						const url = res[0]?.url || ''
+						console.log('Uploaded URL:', url) // Debug
+						form.setValue('previewImage', url, { shouldValidate: true })
 					}}
 				/>
 				<button
 					disabled={loading}
 					type='submit'
-					className='bg-primary hover:bg-primary/80 transition-colors text-white px-4 py-2 rounded-lg'
+					className='bg-primary hover:bg-primary/80 text-white px-4 py-2 rounded-lg'
 				>
 					{loading ? 'Loading...' : 'Submit'}
 				</button>
 			</div>
+
+			{form.formState.errors.previewImage && (
+				<p className='text-red-500 text-sm mt-1'>
+					{form.formState.errors.previewImage.message}
+				</p>
+			)}
 		</form>
 	)
 }

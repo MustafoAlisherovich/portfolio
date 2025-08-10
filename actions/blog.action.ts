@@ -10,6 +10,7 @@ export const createBlog = async (data: ICreateBlog) => {
 	try {
 		await connectToDabase()
 		await Blog.create({ ...data })
+		revalidatePath('/admin')
 	} catch (error) {
 		throw new Error('Something went wrong while creating blog!')
 	}
