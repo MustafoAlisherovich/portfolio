@@ -21,7 +21,9 @@ export const getBlogs = async () => {
 		await connectToDabase()
 		const blogs = await Blog.find()
 
-		return blogs
+		const totalBlogs = await Blog.countDocuments()
+
+		return { blogs, totalBlogs }
 	} catch (error) {
 		throw new Error('Something went wrong while getting Blogs!')
 	}

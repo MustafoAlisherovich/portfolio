@@ -1,3 +1,4 @@
+import { IUser } from '@/app,types'
 import Admin from '@/database/admin.model'
 import { connectToDabase } from '@/lib/mongoose'
 import { compare } from 'bcryptjs'
@@ -38,7 +39,7 @@ export const authOptions: NextAuthOptions = {
 	callbacks: {
 		async session({ session, token }) {
 			if (token?.sub) {
-				;(session.user as any).id = token.sub
+				;(session.user as IUser).id = token.sub
 			}
 			return session
 		},

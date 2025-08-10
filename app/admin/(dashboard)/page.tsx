@@ -6,14 +6,24 @@ import { FileCode, Newspaper } from 'lucide-react'
 import StatisticsCard from '../_components/statistics.card'
 
 async function Page() {
-	const projects = await getProjects()
-	const blogs = await getBlogs()
+	const { projects, totalProjects } = await getProjects()
+	const { blogs, totalBlogs } = await getBlogs()
+
+	console.log(projects)
 
 	return (
 		<>
 			<div className='grid grid-cols-2 gap-10 '>
-				<StatisticsCard label='All Projects' value='10' Icon={FileCode} />
-				<StatisticsCard label='All Blogs' value='10' Icon={Newspaper} />
+				<StatisticsCard
+					label='All Projects'
+					value={totalProjects.toString()}
+					Icon={FileCode}
+				/>
+				<StatisticsCard
+					label='All Blogs'
+					value={totalBlogs.toString()}
+					Icon={Newspaper}
+				/>
 			</div>
 
 			<h2 className='text-center mt-12 text-3xl'>Latest Projects</h2>

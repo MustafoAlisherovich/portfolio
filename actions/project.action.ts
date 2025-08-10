@@ -18,9 +18,12 @@ export const createProject = async (data: ICreateProject) => {
 export const getProjects = async () => {
 	try {
 		await connectToDabase()
-		const project = await Project.find()
-		return project
+
+		const projects = await Project.find()
+		const totalProjects = await Project.countDocuments()
+
+		return { projects, totalProjects }
 	} catch (error) {
-		throw new Error('Something went wrong while getting project!')
+		throw new Error('Something went wrong while getting projects!')
 	}
 }

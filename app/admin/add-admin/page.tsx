@@ -41,10 +41,6 @@ export default function AdminDashboard() {
 		}
 	}
 
-	const addAdmin = async (e: React.FormEvent) => {
-		e.preventDefault()
-	}
-
 	return (
 		<form
 			onSubmit={form.handleSubmit(onSubmit)}
