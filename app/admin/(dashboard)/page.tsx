@@ -9,8 +9,6 @@ async function Page() {
 	const { projects, totalProjects } = await getProjects()
 	const { blogs, totalBlogs } = await getBlogs()
 
-	console.log(projects)
-
 	return (
 		<>
 			<div className='grid grid-cols-2 gap-10 '>
