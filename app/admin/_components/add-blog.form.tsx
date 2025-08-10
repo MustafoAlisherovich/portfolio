@@ -100,11 +100,9 @@ function AddBlogForm() {
 						</div>
 					)}
 				/>
-				{form.formState.errors.content && (
-					<p className='text-red-500 text-sm mt-1'>
-						{form.formState.errors.content.message}
-					</p>
-				)}
+				<p className='text-red-500 text-sm mt-1'>
+					{form.formState.errors.content?.message}
+				</p>
 			</div>
 
 			{/* Submit */}

@@ -22,3 +22,14 @@ export const contactSchema = z.object({
 	email: z.string().min(1, 'Email is required'),
 	message: z.string().min(5, 'Message must be at least 5 characters'),
 })
+
+export const loginSchema = z.object({
+	email: z.email('Invalid email address'),
+	password: z.string().min(6, 'Password must be at least 6 characters long'),
+})
+
+export const adminSchema = z.object({
+	name: z.string().optional(),
+	email: z.email(),
+	password: z.string().min(6, 'Password must be at least 6 characters long'),
+})
