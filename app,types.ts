@@ -1,3 +1,5 @@
+import { ComponentType, SVGProps } from 'react'
+
 export interface IBlog {
 	title: string
 	description: string
@@ -19,4 +21,10 @@ export interface IUser {
 	id: string
 	name: string
 	email: string
+}
+
+export interface ISkill {
+	name: string
+	items: string[]
+	icon: ComponentType<SVGProps<SVGSVGElement> & { className?: string }>
 }

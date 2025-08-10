@@ -6,8 +6,8 @@ import Newsletter from './_components/newsletter'
 import Projects from './_components/projects'
 
 async function Page() {
-	const blogs = await getBlogs()
-	const projects = await getProjects()
+	const { blogs } = await getBlogs()
+	const { projects } = await getProjects()
 
 	return (
 		<main>

@@ -2,7 +2,7 @@ import { getBlogs } from '@/actions/blog.action'
 import BlogCard from '@/components/cards/blog.card'
 import Header from '@/components/shared/header'
 async function Page() {
-	const blogs = await getBlogs()
+	const { blogs } = await getBlogs()
 
 	return (
 		<div className='container max-w-7xl mx-auto py-40'>

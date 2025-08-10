@@ -3,7 +3,7 @@ import ProjectCard from '@/components/cards/project.card'
 import Header from '@/components/shared/header'
 
 async function Page() {
-	const projects = await getProjects()
+	const { projects } = await getProjects()
 
 	return (
 		<div className='container max-w-7xl mx-auto py-40'>
