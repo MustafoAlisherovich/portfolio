@@ -1,6 +1,13 @@
 import { getBlogs } from '@/actions/blog.action'
 import BlogCard from '@/components/cards/blog.card'
 import Header from '@/components/shared/header'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+	title: 'Blogs',
+	description: 'Read the latest blogs on various topics.',
+}
+
 async function Page() {
 	const { blogs } = await getBlogs()
 

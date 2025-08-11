@@ -1,6 +1,31 @@
 import { getDetailedBlog } from '@/actions/blog.action'
 import { format } from 'date-fns'
 
+export async function generateMetadata({
+	params,
+}: {
+	params: Promise<{ slug: string }>
+}) {
+	const { slug } = await params
+	const blog = await getDetailedBlog(slug)
+
+	if (!blog) {
+		return {
+			title: 'Blog Not Found',
+			description: 'The blog you are looking for does not exist.',
+		}
+	}
+
+	return {
+		title: blog.title,
+		description: blog.description,
+		openGraph: {
+			title: blog.title,
+			description: blog.description,
+		},
+	}
+}
+
 async function Page({ params }: { params: Promise<{ slug: string }> }) {
 	const { slug } = await params
 	const blogJSON = await getDetailedBlog(slug)

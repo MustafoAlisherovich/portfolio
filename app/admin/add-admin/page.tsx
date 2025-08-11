@@ -92,7 +92,7 @@ export default function AdminDashboard() {
 				type='submit'
 				className='bg-primary hover:bg-primary/80 transition-colors text-white px-4 py-2 rounded-lg'
 			>
-				Add Admin
+				{loading ? 'Loading...' : 'Add Admin'}
 			</button>
 		</form>
 	)

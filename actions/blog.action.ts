@@ -42,7 +42,9 @@ export const deleteBlog = async (id: string, path: string) => {
 export const getDetailedBlog = cache(async (slug: string) => {
 	try {
 		await connectToDabase()
-		return await Blog.findOne({ slug }).select('title content createdAt slug')
+		return await Blog.findOne({ slug }).select(
+			'title content createdAt slug description'
+		)
 	} catch (error) {
 		throw new Error('Something went wrong while getting detailed blog')
 	}

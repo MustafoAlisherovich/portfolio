@@ -75,7 +75,7 @@ export default function AdminLoginPage() {
 					type='submit'
 					className='w-full bg-primary hover:bg-primary/80 rounded-lg h-10 mt-3'
 				>
-					Login
+					{loading ? 'Loading...' : 'Login'}
 				</button>
 			</form>
 		</div>

@@ -1,7 +1,14 @@
 import Header from '@/components/shared/header'
+import { Metadata } from 'next'
 import Education from '../_components/education'
 import Experience from '../_components/experience'
 import Skill from '../_components/skill'
+
+export const metadata: Metadata = {
+	title: 'About Me',
+	description:
+		'Learn more about Mustafo Alisherovich, a Fullstack Web Developer specializing in modern web applications.',
+}
 
 function Page() {
 	return (

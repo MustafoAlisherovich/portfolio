@@ -1,6 +1,13 @@
 import Header from '@/components/shared/header'
+import { Metadata } from 'next'
 import ContactForm from '../_components/contact-form'
 import ContactInfo from '../_components/contact-info'
+
+export const metadata: Metadata = {
+	title: 'Contact Me',
+	description:
+		'If you have any questions or want to get in touch, feel free to contact me.',
+}
 
 function Page() {
 	return (
