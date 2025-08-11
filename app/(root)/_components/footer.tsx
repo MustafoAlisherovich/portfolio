@@ -17,12 +17,14 @@ function Footer() {
 
 					<div className='flex space-x-6'>
 						<Link
+							aria-label='GitHub Profile'
 							href={'https://github.com/MustafoAlisherovich'}
 							className='text-2xl text-gray-600 hover:text-primary dark:text-gray-300 transition-colors duration-300'
 						>
 							<FaGithub />
 						</Link>
 						<Link
+							aria-label='LinkedIn Profile'
 							href={
 								'https://www.linkedin.com/in/mustafo-alisherovich-0634332a4/'
 							}
@@ -31,6 +33,7 @@ function Footer() {
 							<FaLinkedin />
 						</Link>
 						<Link
+							aria-label='Facebook Profile'
 							href={'https://www.facebook.com/mustafo.joraboyev.3/about'}
 							className='text-2xl text-gray-600 hover:text-primary dark:text-gray-300 transition-colors duration-300'
 						>

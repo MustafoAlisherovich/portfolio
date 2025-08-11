@@ -33,6 +33,7 @@ function ContactInfo() {
 					<div>
 						<h3 className='text-semibold'>Email</h3>
 						<Link
+							aria-label='info@mustafoalisherovich.ru'
 							href='mailto:info@mustafoalisherovich.ru'
 							className='text-secondary hover:text-primary'
 						>
@@ -51,6 +52,7 @@ function ContactInfo() {
 					<div>
 						<h3 className='text-semibold'>Phone</h3>
 						<Link
+							aria-label='+998911554995'
 							href='tel:+998911554995'
 							className='text-secondary hover:text-primary'
 						>

@@ -68,6 +68,7 @@ function ContactForm() {
 				<motion.div variants={fadeInUp}>
 					<label className='block text-sm font-medium mb-2'>Name</label>
 					<input
+						aria-label='Name'
 						disabled={loading}
 						type='text'
 						{...form.register('name')}
@@ -83,6 +84,7 @@ function ContactForm() {
 				<motion.div variants={fadeInUp}>
 					<label className='block text-sm font-medium mb-2'>Email</label>
 					<input
+						aria-label='Email'
 						disabled={loading}
 						type='email'
 						{...form.register('email')}
@@ -99,6 +101,7 @@ function ContactForm() {
 						Message
 					</label>
 					<textarea
+						aria-label='Message'
 						disabled={loading}
 						{...form.register('message')}
 						className='w-full px-4 py-2 rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-dark focus:ring-2 placeholder:text-primary/40 focus:ring-primary focus:border-transparent'
@@ -111,6 +114,7 @@ function ContactForm() {
 				</motion.div>
 
 				<motion.button
+					aria-label='Submit Contact Form'
 					type='submit'
 					disabled={loading}
 					className='w-full btn btn-primary'

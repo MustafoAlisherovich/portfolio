@@ -47,6 +47,7 @@ export default function Navbar() {
 							)
 						})}
 						<motion.button
+							aria-label='Toggle Theme'
 							onClick={toggleTheme}
 							className='p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors'
 							whileHover={{ scale: 1.1 }}
@@ -62,6 +63,7 @@ export default function Navbar() {
 
 					{/* Mobile Menu Button */}
 					<motion.button
+						aria-label='Toggle Mobile Menu'
 						className='md:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors'
 						onClick={toggleMobileMenu}
 						whileHover={{ scale: 1.1 }}
@@ -108,6 +110,7 @@ export default function Navbar() {
 									transition={{ delay: menuItems.length * 0.1 }}
 								>
 									<button
+										aria-label='Toggle Theme'
 										onClick={() => {
 											toggleTheme()
 											setIsMobileMenuOpen(false)

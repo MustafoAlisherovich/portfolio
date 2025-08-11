@@ -65,6 +65,7 @@ function ProjectCard({ project }: Props) {
 				className='flex gap-4 mt-2'
 			>
 				<motion.a
+					aria-label='View Source Code'
 					whileHover={{ x: 5 }}
 					whileTap={{ scale: 0.95 }}
 					href={project.github}
@@ -75,6 +76,7 @@ function ProjectCard({ project }: Props) {
 					<span>Code</span>
 				</motion.a>
 				<motion.a
+					aria-label='Live Demo'
 					whileHover={{ x: 5 }}
 					whileTap={{ scale: 0.95 }}
 					href={project.liveDemo}

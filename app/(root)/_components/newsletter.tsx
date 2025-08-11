@@ -19,6 +19,7 @@ function Newsletter() {
 						</div>
 						<form className='flex flex-col md:flex-row gap-4'>
 							<input
+								aria-label='Email Subscription'
 								type='email'
 								placeholder='Enter your email'
 								className='flex-1 px-4 py-3 border rounded-lg dark:text-white border-gray-300 dark:border-b-gray-600 bg-white placeholder:text-primary/40 text-gray-500 dark:bg-dark focus:outline-none focus:ring-2 focus:ring-primary'
@@ -28,6 +29,7 @@ function Newsletter() {
 								whileTap={{ scale: 0.95 }}
 							>
 								<button
+									aria-label='Subscribe to Newsletter'
 									type='submit'
 									className='bg-primary text-white px-8 py-3 rounded-lg hover:bg-primary/90 transition-colors'
 								>

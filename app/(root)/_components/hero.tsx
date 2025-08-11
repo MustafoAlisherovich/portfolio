@@ -54,17 +54,20 @@ function Hero() {
 				>
 					<Link
 						href={'https://github.com/MustafoAlisherovich'}
+						aria-label='GitHub Profile'
 						className='text-2xl text-gray-600 hover:text-primary dark:text-gray-300 transition-colors duration-300'
 					>
 						<FaGithub />
 					</Link>
 					<Link
+						aria-label='LinkedIn Profile'
 						href={'https://www.linkedin.com/in/mustafo-alisherovich-0634332a4/'}
 						className='text-2xl text-gray-600 hover:text-primary dark:text-gray-300 transition-colors duration-300'
 					>
 						<FaLinkedin />
 					</Link>
 					<Link
+						aria-label='Facebook Profile'
 						href={'https://www.facebook.com/mustafo.joraboyev.3/about'}
 						className='text-2xl text-gray-600 hover:text-primary dark:text-gray-300 transition-colors duration-300'
 					>
@@ -79,6 +82,7 @@ function Hero() {
 				>
 					<motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
 						<Link
+							aria-label='View Projects'
 							href='/projects'
 							className='bg-primary inline-block w-full md:w-auto text-white px-8 py-3 rounded-lg hover:bg-primary/90 transition-colors'
 						>
@@ -87,6 +91,7 @@ function Hero() {
 					</motion.div>
 					<motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
 						<Link
+							aria-label='Contact Me'
 							href='/contact'
 							className=' inline-block w-full bg-gray-500  md:w-auto text-gray-800 dark:text-white px-8 py-3 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors'
 						>
