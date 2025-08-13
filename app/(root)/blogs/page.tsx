@@ -3,6 +3,8 @@ import BlogCard from '@/components/cards/blog.card'
 import Header from '@/components/shared/header'
 import { Metadata } from 'next'
 
+export const dynamic = 'force-dynamic'
+
 export const metadata: Metadata = {
 	title: 'Blogs',
 	description: 'Read the latest blogs on various topics.',

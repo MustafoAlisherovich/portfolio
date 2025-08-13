@@ -3,6 +3,8 @@ import ProjectCard from '@/components/cards/project.card'
 import Header from '@/components/shared/header'
 import { Metadata } from 'next'
 
+export const dynamic = 'force-dynamic'
+
 export const metadata: Metadata = {
 	title: 'Projects',
 	description: 'Explore my recent projects and contributions.',

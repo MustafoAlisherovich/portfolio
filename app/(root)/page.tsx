@@ -5,6 +5,8 @@ import Hero from './_components/hero'
 import Newsletter from './_components/newsletter'
 import Projects from './_components/projects'
 
+export const dynamic = 'force-dynamic'
+
 async function Page() {
 	const { blogs } = await getBlogs()
 	const { projects } = await getProjects()
