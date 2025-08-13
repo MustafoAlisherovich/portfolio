@@ -2,8 +2,10 @@ import { ThemeProvider } from '@/components/providers/theme-context'
 import { ChildProps } from '@/types'
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
+import { GoogleAnalytics } from 'next/third-parties/google'
 import NextTopLoader from 'nextjs-toploader'
 import { Toaster } from 'react-hot-toast'
+
 import './globals.css'
 
 const geistSans = Geist({
@@ -86,6 +88,7 @@ export default function RootLayout({ children }: ChildProps) {
 					{children}
 				</ThemeProvider>
 			</body>
+			<GoogleAnalytics gaId='G-K2SG5HZKHS' />
 		</html>
 	)
 }
