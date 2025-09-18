@@ -50,7 +50,6 @@ function Skill() {
 					<h3 className='text-xl font-semibold mb-2'>Tools & Others</h3>
 					<ul className='text-secondary space-y-2'>
 						<li>Git / Github</li>
-						<li>AWS</li>
 						<li>Firebase</li>
 						<li>Hygraph</li>
 						<li>CI/CD</li>

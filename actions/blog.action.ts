@@ -33,6 +33,7 @@ export const deleteBlog = async (id: string, path: string) => {
 	try {
 		await connectToDabase()
 		await Blog.findByIdAndDelete(id)
+
 		revalidatePath(path)
 	} catch (error) {
 		throw new Error('Something went wrong while deleting blog')
