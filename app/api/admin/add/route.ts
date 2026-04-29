@@ -14,7 +14,6 @@ export async function POST(req: Request) {
 
 	await connectToDabase()
 
-	// Faqat mavjud adminlarga ruxsat
 	const currentAdmin = await Admin.findOne({ email: session.user.email })
 	if (!currentAdmin) {
 		return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
@@ -23,11 +22,14 @@ export async function POST(req: Request) {
 	const { email, password, name } = await req.json()
 
 	if (!email || !password) {
-		return NextResponse.json({ error: 'Email va parol shart' }, { status: 400 })
+		return NextResponse.json(
+			{ error: 'Email and password are required' },
+			{ status: 400 },
+		)
 	}
 
 	const hashedPassword = await bcrypt.hash(password, 10)
 	await Admin.create({ email, password: hashedPassword, name })
 
-	return NextResponse.json({ message: 'Admin qo‘shildi' })
+	return NextResponse.json({ message: 'Admin Added!' })
 }
