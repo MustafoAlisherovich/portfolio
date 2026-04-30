@@ -21,6 +21,29 @@ function Experience() {
 					{...cardHoverSmall}
 					className='bg-white dark:bg-dark/50 p-6 rounded-lg shadow-md'
 				>
+					<h3 className='text-xl font-semibold mb-2'>Frontend Developer</h3>
+					<p className='text-primary mb-2'>Sammi • 2023 - 2025</p>
+					<ul className='text-secondary space-y-2 list-disc list-inside'>
+						<li>
+							Developed a clinic website using Next.js with a GraphQL-based
+							architecture
+						</li>
+						<li>
+							Built responsive and user-friendly UI components for patient
+							interaction and content browsing
+						</li>
+						<li>
+							Integrated GraphQL APIs for efficient data fetching and state
+							management
+						</li>
+					</ul>
+				</motion.div>
+
+				<motion.div
+					variants={fadeInUp}
+					{...cardHoverSmall}
+					className='bg-white dark:bg-dark/50 p-6 rounded-lg shadow-md'
+				>
 					<h3 className='text-xl font-semibold mb-2'>Full Stack Developer</h3>
 					<p className='text-primary mb-2'>Sammi • 2023 - 2025</p>
 					<ul className='text-secondary space-y-2 list-disc list-inside'>
@@ -41,13 +64,11 @@ function Experience() {
 					{...cardHoverSmall}
 					className='bg-white dark:bg-dark/50 p-6 rounded-lg shadow-md'
 				>
-					<h3 className='text-xl font-semibold mb-2'>
-						Freelance Fullstack Developer
-					</h3>
+					<h3 className='text-xl font-semibold mb-2'>Freelance on Fiverr</h3>
 					<p className='text-primary mb-2'>Self-Employed • Present</p>
 					<ul className='text-secondary space-y-2 list-disc list-inside'>
 						<li>
-							Built and deployed 3 web projects for individual clients using
+							Built and deployed 5+ web projects for individual clients using
 							React, Next.js and Node.js.
 						</li>
 						<li>
