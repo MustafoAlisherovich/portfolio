@@ -1,5 +1,6 @@
 import { ThemeProvider } from '@/components/providers/theme-context'
 import { ChildProps } from '@/types'
+import { GoogleAnalytics } from '@next/third-parties/google'
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import NextTopLoader from 'nextjs-toploader'
@@ -87,6 +88,7 @@ export default function RootLayout({ children }: ChildProps) {
 					{children}
 				</ThemeProvider>
 			</body>
+			<GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID as string} />
 		</html>
 	)
 }
